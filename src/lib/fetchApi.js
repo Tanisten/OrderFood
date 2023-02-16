@@ -21,7 +21,14 @@ export const fetchAPI = async (path, options = {}) => {
     const result = await responce.json();
 
     return result;
-  } catch (error) {
+  }
+  
+  
+  
+  
+  
+  
+  catch (error) {
     throw error;
   }
 };

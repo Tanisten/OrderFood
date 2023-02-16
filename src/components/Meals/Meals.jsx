@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { fetchAPI } from "../../lib/fetchApi";
- 
+
 import { MealItem } from "./MealItem";
 
 const DUMMY_MEALS = [
@@ -30,10 +30,14 @@ const DUMMY_MEALS = [
 export const Meals = () => {
   const [meals, setMeals] = useState([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+
   const getMeals = async () => {
     try {
+      setLoading(true);
       const responce = await fetchAPI("foods");
       setMeals(responce.data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
       setError("Failed to load meals");
@@ -46,6 +50,8 @@ export const Meals = () => {
 
   return (
     <Card>
+      {loading && !error && <p>Loading...</p>}
+      {error && <p>{error}</p>}
       {DUMMY_MEALS.map((meal) => {
         return (
           <MealItem

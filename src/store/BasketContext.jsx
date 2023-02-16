@@ -1,9 +1,23 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
+import { fetchAPI } from "../lib/fetchApi";
 
 export const BasketContext = createContext({ items: [] });
 
 export const BasketProvider = ({ children }) => {
   const [items, setItems] = useState([]);
+
+  const getBasket = async () => {
+    try {
+      const { data } = await fetchAPI("basket");
+      setItems(data.items);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getBasket();
+  }, []);
 
   const addToBasket = (item) => {
     setItems((prevState) => {
