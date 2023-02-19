@@ -1,6 +1,8 @@
+import { memo } from "react";
 import styled from "styled-components";
 
-export const SummaryInfoCard = () => {
+  const SummaryInfoCard = () => {
+
   return (
     <Card>
       <h1>Delicious Food, Delivered To You</h1>
@@ -17,6 +19,8 @@ export const SummaryInfoCard = () => {
     </Card>
   );
 };
+
+export default memo(SummaryInfoCard)
 
 const Card = styled.div`
   color: white;

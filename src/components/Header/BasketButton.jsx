@@ -1,7 +1,9 @@
+ 
 import styled from "styled-components";
 import { ReactComponent as BasketIcon } from "../../Assets/Icons/Group.svg";
 
-export const BasketButton = ({ count, ...restProps }) => {
+
+export const BasketButton =({ count, ...restProps }) => {
   return (
     <StyledBasketButton {...restProps} >
       <BasketIcon />
@@ -11,6 +13,8 @@ export const BasketButton = ({ count, ...restProps }) => {
     </StyledBasketButton>
   );
 };
+
+ 
 
 const StyledBasketButton = styled.button`
   padding: 12px 32px;

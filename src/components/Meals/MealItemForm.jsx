@@ -1,57 +1,57 @@
-import React, { useContext, useState } from "react";
+import React, { memo, useCallback, useContext, useState } from "react";
 import { Button } from "../UI/Button";
 import { ReactComponent as PlusIcon } from "../../Assets/Icons/PlusIcon.svg";
 import styled from "styled-components";
 import { BasketContext } from "../../store/BasketContext";
 
-const MealItemForm = ({ id, title, price}) => {
-    const {addToBasket} = useContext(BasketContext)
+const MealItemForm = ({ id, title, price }) => {
+  const { memoAddToBasket } = useContext(BasketContext);
+console.log("lol")
+  const [amount, setAmount] = useState(1);
 
+  const amountChangeHandler = (event) => {
+    setAmount(event.target.value);
+  };
 
+  const amountHandler = useCallback((event) => {
+    return amountChangeHandler(event);
+  }, []);
 
-const [amount, setAmount] = useState(1)
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const basketItem = {
+      id,
+      price,
+      title,
+      amount,
+    };
+    memoAddToBasket(basketItem);
+  };
 
-
-const amountChangeHandler = ( event)=> {
-    setAmount(event.target.value)
-}
-
-
-
-    const submitHandler = (event)=> {
-        event.preventDefault()
-
-
-
-        const basketItem = {
-            id,
-            price,
-            title,
-             amount,
-        }
-
-
-
-
-        addToBasket(basketItem)
-    }
+  const memoSubmitHandler = useCallback((event) => {
+    return submitHandler(event);
+  }, []);
 
   return (
-
-    <StyledForm onSubmit={submitHandler}>
+    <StyledForm onSubmit={memoSubmitHandler}>
       <span>
         <StyledLabel htmlFor={id}>Amount</StyledLabel>
-        <StyledInput value={amount} onChange={amountChangeHandler}  id={id} type="number" /* min={1}  max={5} *//>
+        <StyledInput
+          value={amount}
+          onChange={amountHandler}
+          id={id}
+          type="number" /* min={1}  max={5} */
+        />
       </span>
 
       <Button>
-        <StyledIcon /> <p>Add</p> 
+        <StyledIcon /> <p>Add</p>
       </Button>
     </StyledForm>
   );
 };
 
-export default MealItemForm;
+export default memo(MealItemForm);
 
 const StyledForm = styled.form`
   display: flex;
@@ -75,9 +75,7 @@ const StyledForm = styled.form`
   }
 `;
 
-const StyledIcon = styled(PlusIcon)`
- 
-`;
+const StyledIcon = styled(PlusIcon)``;
 
 const StyledLabel = styled.label`
   font-weight: 600;

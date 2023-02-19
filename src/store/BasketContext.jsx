@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useEffect, useState } from "react";
 import { fetchAPI } from "../lib/fetchApi";
 
 export const BasketContext = createContext({ items: [] });
@@ -50,7 +50,6 @@ export const BasketProvider = ({ children }) => {
     try {
       const { data } = await fetchAPI(`basketItem/${id}/delete`, {
         method: "DELETE",
-      
       });
       setItems(data.items);
     } catch (error) {
@@ -58,11 +57,15 @@ export const BasketProvider = ({ children }) => {
     }
   };
 
+  const memoAddToBasket = useCallback(() => {
+    return addToBasket();
+  }, []);
+
   const state = {
     items,
-    addToBasket,
+    memoAddToBasket,
     updateBaskeItem,
-    deleteBaskeItem
+    deleteBaskeItem,
   };
 
   return (
