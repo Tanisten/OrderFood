@@ -28,19 +28,15 @@ const MealItemForm = ({ id, title, price }) => {
     memoAddToBasket(basketItem);
   };
 
-  const memoSubmitHandler = useCallback((event) => {
-    return submitHandler(event);
-  }, []);
-
   return (
-    <StyledForm onSubmit={memoSubmitHandler}>
+    <StyledForm onSubmit={submitHandler}>
       <span>
         <StyledLabel htmlFor={id}>Amount</StyledLabel>
         <StyledInput
           value={amount}
           onChange={amountHandler}
           id={id}
-          type="number" /* min={1}  max={5} */
+          type="number"  
         />
       </span>
 
