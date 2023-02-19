@@ -1,12 +1,12 @@
-import  Header  from "./components/Header/Header";
+import Header from "./components/Header/Header";
 import Summary from "./components/Summary/Summary";
 import Meals from "./components/Meals/Meals";
 import { Basket } from "./components/Basket/Basket";
 import styled from "styled-components";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import { BasketProvider } from "./store/BasketContext";
 
-const D_DATA = [
+/* const D_DATA = [
   {
     title: "Sushi",
     description: "Finest fish and veggies",
@@ -27,39 +27,22 @@ const D_DATA = [
     description: "Healthy...and green...",
     price: 19.99,
   },
-];
+]; */
 
 function App() {
-
-
-
   const [isBasketVisible, setbasketVisibility] = useState(false);
-
 
   const showBasketHandler = () => {
     setbasketVisibility((prevState) => !prevState);
   };
 
-  const basketHandler = useCallback(()=>{
-    return showBasketHandler()
-  },[])
-
-
-
-
-
-  const [sortDirection, setSortDirection] = useState("asc");
-
-
-
   const clickHandler = useCallback(() => {
     console.log("isBasketVisible", isBasketVisible);
   }, [isBasketVisible]);
 
-  
-
-
-  /* const sortedMeals = useMemo(() => {
+  /* 
+  const [sortDirection, setSortDirection] = useState("asc");
+  const sortedMeals = useMemo(() => {
     const notSorted = [...D_DATA];
 
     return notSorted.sort((a, b) => {
@@ -72,7 +55,7 @@ function App() {
 
   return (
     <BasketProvider>
-      <Header onShowBasket={basketHandler} />
+      <Header onShowBasket={showBasketHandler} />
       <Content>
         <Summary clickHandler={clickHandler} />
         {/* <select
@@ -94,19 +77,3 @@ export default App;
 const Content = styled.div`
   margin-top: 101px;
 `;
-
-// GET /foods
-// Headers: { UserID:"your_name"}
-
-// GET /basket
-// Headers: { UserID:"your_name"}
-
-// POST /foods/:foodId/addToBasket
-// BODY: {amount:number}
-// Headers: { UserID:"your_name"}
-
-// DELETE /basketItem/:id/delete
-// Headers: { UserID:"your_name"}
-
-// PUT /basketItem/:id/update
-// Headers: { UserID:"your_name"}

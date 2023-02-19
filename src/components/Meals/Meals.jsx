@@ -1,8 +1,8 @@
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import styled from "styled-components";
 import { fetchAPI } from "../../lib/fetchApi";
 
-import  MealItem  from "./MealItem";
+import MealItem from "./MealItem";
 
 const Meals = () => {
   const [meals, setMeals] = useState([]);
@@ -19,11 +19,8 @@ const Meals = () => {
   };
 
   useEffect(() => {
-    getMeals()
+    getMeals();
   }, []);
- 
-  
-
 
   return (
     <Card>

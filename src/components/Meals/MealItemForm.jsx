@@ -6,7 +6,7 @@ import { BasketContext } from "../../store/BasketContext";
 
 const MealItemForm = ({ id, title, price }) => {
   const { memoAddToBasket } = useContext(BasketContext);
-console.log("lol")
+  console.log("lol", title);
   const [amount, setAmount] = useState(1);
 
   const amountChangeHandler = (event) => {

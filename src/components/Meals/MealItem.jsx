@@ -1,37 +1,25 @@
 import { memo, useMemo } from "react";
 import styled from "styled-components";
 import MealItemForm from "./MealItemForm";
-import NewComponent from "./newComponent";
 
- const MealItem = ({ title, description, price,id }) => {
+const MealItem = ({ title, description, price, id }) => {
+  const memoTitle = useMemo(() => {
+    const newTitle = title;
 
-
-
-   const memoTitle = useMemo(() => {
-     const newTitle = title
-
-    return  newTitle
+    return newTitle;
   }, [title]);
 
-
-  const memoDescription = useMemo(() => {
-     
-    const newDescription = description
-    return  newDescription
-  }, [description]);
-
   const memoPrice = useMemo(() => {
-    const newPrice = price
+    const newPrice = price;
 
-    return  newPrice
+    return newPrice;
   }, [price]);
 
   const memoId = useMemo(() => {
-    const newId = id
+    const newId = id;
 
-    return  newId
+    return newId;
   }, [id]);
-
 
   return (
     <StyledItem>
@@ -40,14 +28,12 @@ import NewComponent from "./newComponent";
         <p>{description}</p>
         <span>${price}</span>
       </div>
-      <NewComponent></NewComponent>
-      <MealItemForm id={memoId}  title={memoTitle} price={memoPrice} />
+      <MealItemForm id={memoId} title={memoTitle} price={memoPrice} />
     </StyledItem>
   );
 };
 
-
-export default memo(MealItem)
+export default memo(MealItem);
 const StyledItem = styled.li`
   list-style: none;
 
